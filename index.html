@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cashier System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 24px;
+      max-width: 800px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .item-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .item-box {
+      background-color: #f0f0f0;
+      border-radius: 15px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45%;
+      position: relative;
+    }
+
+    .item-box button {
+      background-color: #e0e0e0;
+      border: none;
+      border-radius: 50%;
+      color: #333333;
+      cursor: pointer;
+      font-size: 24px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      width: 40px;
+    }
+
+    .item-box button:hover {
+      background-color: #d0d0d0;
+    }
+
+    .item-box input {
+      background-color: transparent;
+      border: none;
+      color: #333333;
+      font-size: 24px;
+      margin: 0 16px;
+      text-align: center;
+      width: 65px;
+    }
+
+    .order-button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .order-button {
+      background-color: #4caf50;
+      border: none;
+      border-radius: 4px;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 12px 24px;
+      transition: background-color 0.3s ease;
+    }
+
+    .order-button:hover {
+      background-color: #45a049;
+    }
+
+    .total-box {
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      margin-top: 24px;
+      padding: 16px;
+    }
+
+    .total-box p {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-top: 24px;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .item-image {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 10px;
+    }
+
+    .item-box span {
+      margin-left: 10px;
+    }
+
+    #fullSalesContainer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #fullSalesTable {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 24px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 80%;
+      overflow-y: auto;
+    }
+
+    .sales-button {
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 12px 24px;
+      margin: 20px 0;
+      transition: background-color 0.3s ease;
+    }
+
+    .sales-button:hover {
+      background-color: #0056b3;
+    }
+
+    .close-button {
+      background-color: #dc3545;
+      border: none;
+      border-radius: 4px;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 12px 24px;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+
+    .close-button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="item-row">
+      <div class="item-box">
+        <button id="decrementChicken">-</button>
+        <input type="number" id="chickenQuantity" value="0" min="0" readonly>
+        <button id="incrementChicken">+</button>
+        <img src="https://i.ytimg.com/vi/uDFJLGp8BjE/maxresdefault.jpg" alt="Chicken Rashid" class="item-image" id="chickenImage">
+        <span>Chicken Rashid</span>
+      </div>
+      <div class="item-box">
+        <button id="decrementDonuts">-</button>
+        <input type="number" id="donutsQuantity" value="0" min="0" readonly>
+        <button id="incrementDonuts">+</button>
+        <img src="https://sugargeekshow.com/wp-content/uploads/2020/10/baked_donut_recipe_featured.jpg" alt="Donuts" class="item-image" id="donutsImage">
+        <span>Donuts</span>
+      </div>
+    </div>
+    <div class="item-row">
+      <div class="item-box">
+        <button id="decrementCookies">-</button>
+        <input type="number" id="cookiesQuantity" value="0" min="0" readonly>
+        <button id="incrementCookies">+</button>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/2ChocolateChipCookies.jpg" alt="Cookies" class="item-image" id="cookiesImage">
+        <span>Cookies</span>
+      </div>
+      <div class="item-box">
+        <button id="decrementAwarGalb">-</button>
+        <input type="number" id="awarGalbQuantity" value="0" min="0" readonly>
+        <button id="incrementAwarGalb">+</button>
+        <img src="data:image/jpeg;base64,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" alt="Awar Galb" class="item-image" id="awarGalbImage">
+        <span>Awar Galb</span>
+      </div>
+    </div>
+    <div class="order-button-container">
+      <button class="order-button" id="placeOrder">Place Order</button>
+    </div>
+    <div class="total-box">
+      <p>Total: <span id="totalAmount">0.000</span> KD</p>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Total Amount Purchased</th>
+          <th>Total Money Spent on All Orders</th>
+        </tr>
+      </thead>
+      <tbody id="orderSummary">
+        <tr>
+          <td>Chicken Rashid</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0.000</td>
+        </tr>
+        <tr>
+          <td>Donuts</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0.000</td>
+        </tr>
+        <tr>
+          <td>Cookies</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0.000</td>
+        </tr>
+        <tr>
+          <td>Awar Galb</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0.000</td>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <th>0</th>
+          <th>0</th>
+          <th id="totalMoneySpent">0.000</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="fullSalesContainer">
+    <div id="fullSalesTable">
+      <h3>Full Sales</h3>
+      <button class="close-button" id="closeFullSales">Close</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Total Amount</th>
+          </tr>
+        </thead>
+        <tbody id="fullSalesSummary">
+          <tr>
+            <td>Chicken Rashid</td>
+            <td>0</td>
+            <td>0.000 KD</td>
+          </tr>
+          <tr>
+            <td>Donuts</td>
+            <td>0</td>
+            <td>0.000 KD</td>
+          </tr>
+          <tr>
+            <td>Cookies</td>
+            <td>0</td>
+            <td>0.000 KD</td>
+          </tr>
+          <tr>
+            <td>Awar Galb</td>
+            <td>0</td>
+            <td>0.000 KD</td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <th>0</th>
+            <th id="fullSalesTotal">0.000 KD</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <button class="sales-button" id="showFullSales">Full Sales</button>
+
+  <script>
+    const chickenQuantity = document.getElementById('chickenQuantity');
+    const donutsQuantity = document.getElementById('donutsQuantity');
+    const cookiesQuantity = document.getElementById('cookiesQuantity');
+    const awarGalbQuantity = document.getElementById('awarGalbQuantity');
+    const totalAmount = document.getElementById('totalAmount');
+    const placeOrderButton = document.getElementById('placeOrder');
+    const orderSummary = document.getElementById('orderSummary');
+    const totalMoneySpent = document.getElementById('totalMoneySpent');
+    const fullSalesContainer = document.getElementById('fullSalesContainer');
+    const showFullSalesButton = document.getElementById('showFullSales');
+    const closeFullSalesButton = document.getElementById('closeFullSales');
+    const fullSalesSummary = document.getElementById('fullSalesSummary');
+    const fullSalesTotal = document.getElementById('fullSalesTotal');
+
+    const prices = {
+      'Chicken Rashid': 0.750,
+      'Donuts': 0.500,
+      'Cookies': 0.500,
+      'Awar Galb': 0.500
+    };
+
+    let chickenTotal = 0;
+    let donutsTotal = 0;
+    let cookiesTotal = 0;
+    let awarGalbTotal = 0;
+    let grandTotal = 0;
+
+    function updateTotal() {
+      const chickenQuantityValue = parseInt(chickenQuantity.value);
+      const donutsQuantityValue = parseInt(donutsQuantity.value);
+      const cookiesQuantityValue = parseInt(cookiesQuantity.value);
+      const awarGalbQuantityValue = parseInt(awarGalbQuantity.value);
+
+      const totalCost = (chickenQuantityValue * prices['Chicken Rashid']) +
+        (donutsQuantityValue * prices['Donuts']) +
+        (cookiesQuantityValue * prices['Cookies']) +
+        (awarGalbQuantityValue * prices['Awar Galb']);
+
+      totalAmount.textContent = totalCost.toFixed(3);
+    }
+
+    function resetQuantities() {
+      chickenQuantity.value = 0;
+      donutsQuantity.value = 0;
+      cookiesQuantity.value = 0;
+      awarGalbQuantity.value = 0;
+      updateTotal();
+    }
+
+    function updateOrderSummary() {
+      const chickenQuantityValue = parseInt(chickenQuantity.value);
+      const donutsQuantityValue = parseInt(donutsQuantity.value);
+      const cookiesQuantityValue = parseInt(cookiesQuantity.value);
+      const awarGalbQuantityValue = parseInt(awarGalbQuantity.value);
+
+      const chickenRow = orderSummary.rows[0];
+      const donutsRow = orderSummary.rows[1];
+      const cookiesRow = orderSummary.rows[2];
+      const awarGalbRow = orderSummary.rows[3];
+      const totalRow = orderSummary.rows[4];
+
+      chickenTotal += chickenQuantityValue;
+      donutsTotal += donutsQuantityValue;
+      cookiesTotal += cookiesQuantityValue;
+      awarGalbTotal += awarGalbQuantityValue;
+      grandTotal = chickenTotal + donutsTotal + cookiesTotal + awarGalbTotal;
+
+      chickenRow.cells[1].textContent = chickenTotal;
+      chickenRow.cells[2].textContent = chickenTotal;
+      chickenRow.cells[3].textContent = (chickenTotal * prices['Chicken Rashid']).toFixed(3);
+
+      donutsRow.cells[1].textContent = donutsTotal;
+      donutsRow.cells[2].textContent = donutsTotal;
+      donutsRow.cells[3].textContent = (donutsTotal * prices['Donuts']).toFixed(3);
+
+      cookiesRow.cells[1].textContent = cookiesTotal;
+      cookiesRow.cells[2].textContent = cookiesTotal;
+      cookiesRow.cells[3].textContent = (cookiesTotal * prices['Cookies']).toFixed(3);
+
+      awarGalbRow.cells[1].textContent = awarGalbTotal;
+      awarGalbRow.cells[2].textContent = awarGalbTotal;
+      awarGalbRow.cells[3].textContent = (awarGalbTotal * prices['Awar Galb']).toFixed(3);
+
+      totalRow.cells[1].textContent = grandTotal;
+      totalRow.cells[2].textContent = grandTotal;
+      totalMoneySpent.textContent = ((chickenTotal * prices['Chicken Rashid']) +
+        (donutsTotal * prices['Donuts']) +
+        (cookiesTotal * prices['Cookies']) +
+        (awarGalbTotal * prices['Awar Galb'])).toFixed(3);
+
+      addToFullSales(chickenQuantityValue, donutsQuantityValue, cookiesQuantityValue, awarGalbQuantityValue);
+      resetQuantities();
+    }
+
+    function addToFullSales(chickenQty, donutsQty, cookiesQty, awarGalbQty) {
+      const chickenRow = fullSalesSummary.rows[0];
+      const donutsRow = fullSalesSummary.rows[1];
+      const cookiesRow = fullSalesSummary.rows[2];
+      const awarGalbRow = fullSalesSummary.rows[3];
+      const totalRow = fullSalesSummary.rows[4];
+
+      chickenRow.cells[1].textContent = parseInt(chickenRow.cells[1].textContent) + chickenQty;
+      chickenRow.cells[2].textContent = (parseFloat(chickenRow.cells[2].textContent) + chickenQty * prices['Chicken Rashid']).toFixed(3) + " KD";
+
+      donutsRow.cells[1].textContent = parseInt(donutsRow.cells[1].textContent) + donutsQty;
+      donutsRow.cells[2].textContent = (parseFloat(donutsRow.cells[2].textContent) + donutsQty * prices['Donuts']).toFixed(3) + " KD";
+
+      cookiesRow.cells[1].textContent = parseInt(cookiesRow.cells[1].textContent) + cookiesQty;
+      cookiesRow.cells[2].textContent = (parseFloat(cookiesRow.cells[2].textContent) + cookiesQty * prices['Cookies']).toFixed(3) + " KD";
+
+      awarGalbRow.cells[1].textContent = parseInt(awarGalbRow.cells[1].textContent) + awarGalbQty;
+      awarGalbRow.cells[2].textContent = (parseFloat(awarGalbRow.cells[2].textContent) + awarGalbQty * prices['Awar Galb']).toFixed(3) + " KD";
+
+      totalRow.cells[1].textContent = parseInt(totalRow.cells[1].textContent) + chickenQty + donutsQty + cookiesQty + awarGalbQty;
+      fullSalesTotal.textContent = (parseFloat(fullSalesTotal.textContent) +
+        chickenQty * prices['Chicken Rashid'] +
+        donutsQty * prices['Donuts'] +
+        cookiesQty * prices['Cookies'] +
+        awarGalbQty * prices['Awar Galb']).toFixed(3) + " KD";
+    }
+
+    document.getElementById('incrementChicken').addEventListener('click', () => {
+      chickenQuantity.value = parseInt(chickenQuantity.value) + 1;
+      updateTotal();
+    });
+
+    document.getElementById('decrementChicken').addEventListener('click', () => {
+      if (chickenQuantity.value > 0) {
+        chickenQuantity.value = parseInt(chickenQuantity.value) - 1;
+        updateTotal();
+      }
+    });
+
+    document.getElementById('incrementDonuts').addEventListener('click', () => {
+      donutsQuantity.value = parseInt(donutsQuantity.value) + 1;
+      updateTotal();
+    });
+
+    document.getElementById('decrementDonuts').addEventListener('click', () => {
+      if (donutsQuantity.value > 0) {
+        donutsQuantity.value = parseInt(donutsQuantity.value) - 1;
+        updateTotal();
+      }
+    });
+
+    document.getElementById('incrementCookies').addEventListener('click', () => {
+      cookiesQuantity.value = parseInt(cookiesQuantity.value) + 1;
+      updateTotal();
+    });
+
+    document.getElementById('decrementCookies').addEventListener('click', () => {
+      if (cookiesQuantity.value > 0) {
+        cookiesQuantity.value = parseInt(cookiesQuantity.value) - 1;
+        updateTotal();
+      }
+    });
+
+    document.getElementById('incrementAwarGalb').addEventListener('click', () => {
+      awarGalbQuantity.value = parseInt(awarGalbQuantity.value) + 1;
+      updateTotal();
+    });
+
+    document.getElementById('decrementAwarGalb').addEventListener('click', () => {
+      if (awarGalbQuantity.value > 0) {
+        awarGalbQuantity.value = parseInt(awarGalbQuantity.value) - 1;
+        updateTotal();
+      }
+    });
+
+    placeOrderButton.addEventListener('click', updateOrderSummary);
+
+    showFullSalesButton.addEventListener('click', () => {
+      fullSalesContainer.style.display = 'flex';
+    });
+
+    closeFullSalesButton.addEventListener('click', () => {
+      fullSalesContainer.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
