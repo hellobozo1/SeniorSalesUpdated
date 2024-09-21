@@ -424,6 +424,25 @@
   <button class="sales-button" id="showFullSales">Full Sales</button>
 
   <script>
+// Define the current version of the app
+    const appVersion = '1.0.0'; // Increment this version number with each deployment
+
+    // Function to check version and clear localStorage if needed
+    function checkAndClearLocalStorage() {
+      const storedVersion = localStorage.getItem('appVersion');
+      if (storedVersion !== appVersion) {
+        // Clear the specific localStorage items used by the app
+        localStorage.removeItem('cashierData'); // Remove the 'cashierData' key
+        // If there are other keys used by your app, remove them here
+        // Example: localStorage.removeItem('anotherKey');
+
+        // Update the stored version to the current version
+        localStorage.setItem('appVersion', appVersion);
+      }
+    }
+
+    // Invoke the version check on page load
+    checkAndClearLocalStorage();
     // Get quantity inputs
     const awarGalbQuantity = document.getElementById('awarGalbQuantity');
     const sausageKraftQuantity = document.getElementById('sausageKraftQuantity');
