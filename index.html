@@ -531,6 +531,7 @@
         hashbrownQuantityValue,
         kunafaChocolateQuantityValue
       );
+      saveData();
       resetQuantities();
     }
 
@@ -574,6 +575,121 @@
         pizzaQty * prices['Pizza'] +
         hashbrownQty * prices['Hashbrown'] +
         kunafaChocolateQty * prices['Kunafa Chocolate']).toFixed(3) + " KD";
+
+      saveData();
+    }
+
+    function saveData() {
+      const data = {
+        awarGalbTotal,
+        akkawiTotal,
+        hotDogKraftTotal,
+        mortadillaTotal,
+        pizzaTotal,
+        hashbrownTotal,
+        kunafaChocolateTotal,
+        grandTotal,
+        totalMoneySpent: totalMoneySpent.textContent,
+        fullSales: {
+          awarGalbQty: fullSalesSummary.rows[0].cells[1].textContent,
+          awarGalbAmount: fullSalesSummary.rows[0].cells[2].textContent,
+          akkawiQty: fullSalesSummary.rows[1].cells[1].textContent,
+          akkawiAmount: fullSalesSummary.rows[1].cells[2].textContent,
+          hotDogKraftQty: fullSalesSummary.rows[2].cells[1].textContent,
+          hotDogKraftAmount: fullSalesSummary.rows[2].cells[2].textContent,
+          mortadillaQty: fullSalesSummary.rows[3].cells[1].textContent,
+          mortadillaAmount: fullSalesSummary.rows[3].cells[2].textContent,
+          pizzaQty: fullSalesSummary.rows[4].cells[1].textContent,
+          pizzaAmount: fullSalesSummary.rows[4].cells[2].textContent,
+          hashbrownQty: fullSalesSummary.rows[5].cells[1].textContent,
+          hashbrownAmount: fullSalesSummary.rows[5].cells[2].textContent,
+          kunafaChocolateQty: fullSalesSummary.rows[6].cells[1].textContent,
+          kunafaChocolateAmount: fullSalesSummary.rows[6].cells[2].textContent,
+          totalQty: fullSalesSummary.rows[7].cells[1].textContent,
+          totalAmount: fullSalesTotal.textContent
+        }
+      };
+      localStorage.setItem('cashierData', JSON.stringify(data));
+    }
+
+    function loadData() {
+      const data = JSON.parse(localStorage.getItem('cashierData'));
+      if (data) {
+        awarGalbTotal = data.awarGalbTotal;
+        akkawiTotal = data.akkawiTotal;
+        hotDogKraftTotal = data.hotDogKraftTotal;
+        mortadillaTotal = data.mortadillaTotal;
+        pizzaTotal = data.pizzaTotal;
+        hashbrownTotal = data.hashbrownTotal;
+        kunafaChocolateTotal = data.kunafaChocolateTotal;
+        grandTotal = data.grandTotal;
+        totalMoneySpent.textContent = data.totalMoneySpent;
+
+        const awarGalbRow = orderSummary.rows[0];
+        const akkawiRow = orderSummary.rows[1];
+        const hotDogKraftRow = orderSummary.rows[2];
+        const mortadillaRow = orderSummary.rows[3];
+        const pizzaRow = orderSummary.rows[4];
+        const hashbrownRow = orderSummary.rows[5];
+        const kunafaChocolateRow = orderSummary.rows[6];
+        const totalRow = orderSummary.rows[7];
+
+        awarGalbRow.cells[1].textContent = awarGalbTotal;
+        awarGalbRow.cells[2].textContent = awarGalbTotal;
+        awarGalbRow.cells[3].textContent = (awarGalbTotal * prices['Awar Galb']).toFixed(3);
+
+        akkawiRow.cells[1].textContent = akkawiTotal;
+        akkawiRow.cells[2].textContent = akkawiTotal;
+        akkawiRow.cells[3].textContent = (akkawiTotal * prices['Akkawi']).toFixed(3);
+
+        hotDogKraftRow.cells[1].textContent = hotDogKraftTotal;
+        hotDogKraftRow.cells[2].textContent = hotDogKraftTotal;
+        hotDogKraftRow.cells[3].textContent = (hotDogKraftTotal * prices['Hot Dog Kraft']).toFixed(3);
+
+        mortadillaRow.cells[1].textContent = mortadillaTotal;
+        mortadillaRow.cells[2].textContent = mortadillaTotal;
+        mortadillaRow.cells[3].textContent = (mortadillaTotal * prices['Mortadilla']).toFixed(3);
+
+        pizzaRow.cells[1].textContent = pizzaTotal;
+        pizzaRow.cells[2].textContent = pizzaTotal;
+        pizzaRow.cells[3].textContent = (pizzaTotal * prices['Pizza']).toFixed(3);
+
+        hashbrownRow.cells[1].textContent = hashbrownTotal;
+        hashbrownRow.cells[2].textContent = hashbrownTotal;
+        hashbrownRow.cells[3].textContent = (hashbrownTotal * prices['Hashbrown']).toFixed(3);
+
+        kunafaChocolateRow.cells[1].textContent = kunafaChocolateTotal;
+        kunafaChocolateRow.cells[2].textContent = kunafaChocolateTotal;
+        kunafaChocolateRow.cells[3].textContent = (kunafaChocolateTotal * prices['Kunafa Chocolate']).toFixed(3);
+
+        totalRow.cells[1].textContent = grandTotal;
+        totalRow.cells[2].textContent = grandTotal;
+
+        // Load Full Sales Summary
+        fullSalesSummary.rows[0].cells[1].textContent = data.fullSales.awarGalbQty;
+        fullSalesSummary.rows[0].cells[2].textContent = data.fullSales.awarGalbAmount;
+
+        fullSalesSummary.rows[1].cells[1].textContent = data.fullSales.akkawiQty;
+        fullSalesSummary.rows[1].cells[2].textContent = data.fullSales.akkawiAmount;
+
+        fullSalesSummary.rows[2].cells[1].textContent = data.fullSales.hotDogKraftQty;
+        fullSalesSummary.rows[2].cells[2].textContent = data.fullSales.hotDogKraftAmount;
+
+        fullSalesSummary.rows[3].cells[1].textContent = data.fullSales.mortadillaQty;
+        fullSalesSummary.rows[3].cells[2].textContent = data.fullSales.mortadillaAmount;
+
+        fullSalesSummary.rows[4].cells[1].textContent = data.fullSales.pizzaQty;
+        fullSalesSummary.rows[4].cells[2].textContent = data.fullSales.pizzaAmount;
+
+        fullSalesSummary.rows[5].cells[1].textContent = data.fullSales.hashbrownQty;
+        fullSalesSummary.rows[5].cells[2].textContent = data.fullSales.hashbrownAmount;
+
+        fullSalesSummary.rows[6].cells[1].textContent = data.fullSales.kunafaChocolateQty;
+        fullSalesSummary.rows[6].cells[2].textContent = data.fullSales.kunafaChocolateAmount;
+
+        fullSalesSummary.rows[7].cells[1].textContent = data.fullSales.totalQty;
+        fullSalesTotal.textContent = data.fullSales.totalAmount;
+      }
     }
 
     // Event listeners for increment and decrement buttons
@@ -670,6 +786,9 @@
     closeFullSalesButton.addEventListener('click', () => {
       fullSalesContainer.style.display = 'none';
     });
+
+    // Load data on page load
+    window.addEventListener('load', loadData);
   </script>
 </body>
 </html>
