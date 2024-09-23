@@ -33,6 +33,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 16px;
+      flex-wrap: wrap;
     }
 
     .item-box {
@@ -41,9 +42,10 @@
       padding: 16px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       width: 45%;
       position: relative;
+      flex-wrap: wrap;
     }
 
     .item-box button {
@@ -58,6 +60,7 @@
       text-align: center;
       transition: background-color 0.3s ease;
       width: 40px;
+      margin: 0 5px;
     }
 
     .item-box button:hover {
@@ -128,11 +131,12 @@
       height: 60px;
       object-fit: cover;
       border-radius: 50%;
-      margin: 0 10px;
+      margin-right: 10px;
     }
 
     .item-box span {
       margin-left: 10px;
+      font-size: 18px;
     }
 
     #fullSalesContainer {
@@ -190,11 +194,44 @@
     .close-button:hover {
       background-color: #c82333;
     }
+
+    .toppings-toggle {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .toppings-toggle span {
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    .toppings-toggle button {
+      margin: 0 5px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s ease;
+      font-size: 14px; /* Reduced font size */
+    }
+
+    .toppings-toggle button.active {
+      background-color: #4caf50;
+      color: #ffffff;
+    }
+
+    .toppings-toggle button:hover {
+      background-color: #d0d0d0;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- First Row -->
+    <!-- First Row: Awar Galb and Lemonade -->
     <div class="item-row">
       <div class="item-box">
         <button id="decrementAwarGalb">-</button>
@@ -204,40 +241,6 @@
         <span>Awar Galb</span>
       </div>
       <div class="item-box">
-        <button id="decrementSausageKraft">-</button>
-        <input type="number" id="sausageKraftQuantity" value="0" min="0" readonly>
-        <button id="incrementSausageKraft">+</button>
-        <img src="https://path/to/sausage_image.jpg" alt="Sausage and Kraft Cheese" class="item-image" id="sausageKraftImage">
-        <span>Sausage and Kraft Cheese</span>
-      </div>
-    </div>
-    <!-- Second Row -->
-    <div class="item-row">
-      <div class="item-box">
-        <button id="decrementNutella">-</button>
-        <input type="number" id="nutellaQuantity" value="0" min="0" readonly>
-        <button id="incrementNutella">+</button>
-        <img src="https://images.deliveryhero.io/image/hungerstation/menus/menuitem/hsimg-17163958?width=1440&quality=75" alt="Nutella" class="item-image" id="nutellaImage">
-        <span>Nutella</span>
-      </div>
-      <div class="item-box">
-        <button id="decrementZaatar">-</button>
-        <input type="number" id="zaatarQuantity" value="0" min="0" readonly>
-        <button id="incrementZaatar">+</button>
-        <img src="https://www.alphafoodie.com/wp-content/uploads/2021/03/Manakish-Zaatar-1-of-1.jpeg" alt="Za'atar" class="item-image" id="zaatarImage">
-        <span>Za'atar</span>
-      </div>
-    </div>
-    <!-- Third Row -->
-    <div class="item-row">
-      <div class="item-box">
-        <button id="decrementFourSeason">-</button>
-        <input type="number" id="fourSeasonQuantity" value="0" min="0" readonly>
-        <button id="incrementFourSeason">+</button>
-        <img src="https://images.deliveryhero.io/image/talabat/Menuitems/%D9%81%D9%88%D8%B1_%D8%B3%D9%8A%D8%B2%D9%88%D9%86%D8%B2_636716017435205289.jpg?width=172&height=172" alt="Four Season" class="item-image" id="fourSeasonImage">
-        <span>Four Season</span>
-      </div>
-      <div class="item-box">
         <button id="decrementLemonade">-</button>
         <input type="number" id="lemonadeQuantity" value="0" min="0" readonly>
         <button id="incrementLemonade">+</button>
@@ -245,15 +248,42 @@
         <span>Lemonade</span>
       </div>
     </div>
-    <!-- Fourth Row -->
+    <!-- Second Row: Zaatar and Nutella -->
     <div class="item-row">
       <div class="item-box">
-        <button id="decrementKDDIceCream">-</button>
-        <input type="number" id="kddIceCreamQuantity" value="0" min="0" readonly>
-        <button id="incrementKDDIceCream">+</button>
-        <img src="https://eshop.kddc.com/image/cache/catalog/ic_mc-250x250.jpg" alt="KDD Ice Cream" class="item-image" id="kddIceCreamImage">
-        <span>KDD Ice Cream</span>
+        <button id="decrementZaatar">-</button>
+        <input type="number" id="zaatarQuantity" value="0" min="0" readonly>
+        <button id="incrementZaatar">+</button>
+        <img src="https://www.alphafoodie.com/wp-content/uploads/2021/03/Manakish-Zaatar-1-of-1.jpeg" alt="Za'atar" class="item-image" id="zaatarImage">
+        <span>Za'atar</span>
       </div>
+      <div class="item-box">
+        <button id="decrementNutella">-</button>
+        <input type="number" id="nutellaQuantity" value="0" min="0" readonly>
+        <button id="incrementNutella">+</button>
+        <img src="https://images.deliveryhero.io/image/hungerstation/menus/menuitem/hsimg-17163958?width=1440&quality=75" alt="Nutella" class="item-image" id="nutellaImage">
+        <span>Nutella</span>
+      </div>
+    </div>
+    <!-- Third Row: Sausage and Kraft Cheese and Chicken Rashid -->
+    <div class="item-row">
+      <div class="item-box">
+        <button id="decrementSausageKraft">-</button>
+        <input type="number" id="sausageKraftQuantity" value="0" min="0" readonly>
+        <button id="incrementSausageKraft">+</button>
+        <img src="https://tryloops3bucket.s3.me-south-1.amazonaws.com/productImages/11392/16567102092907854.webp" alt="Sausage and Kraft Cheese" class="item-image" id="sausageKraftImage">
+        <span>Sausage and Kraft Cheese</span>
+      </div>
+      <div class="item-box">
+        <button id="decrementChickenRashid">-</button>
+        <input type="number" id="chickenRashidQuantity" value="0" min="0" readonly>
+        <button id="incrementChickenRashid">+</button>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI0Ts082na4TsfA8b_7BtxKvICoc9vnIPZA&s" alt="Chicken Rashid" class="item-image" id="chickenRashidImage">
+        <span>Chicken Rashid</span>
+      </div>
+    </div>
+    <!-- Fourth Row: Hashbrown and KDD Ice Cream -->
+    <div class="item-row">
       <div class="item-box">
         <button id="decrementHashbrown">-</button>
         <input type="number" id="hashbrownQuantity" value="0" min="0" readonly>
@@ -261,15 +291,17 @@
         <img src="https://s7d1.scene7.com/is/image/mcdonalds/mcdonalds-Hash-Brown-New:1-3-product-tile-desktop?wid=829&hei=515&dpr=off" alt="Hashbrown" class="item-image" id="hashbrownImage">
         <span>Hashbrown</span>
       </div>
-    </div>
-    <!-- Fifth Row -->
-    <div class="item-row">
       <div class="item-box">
-        <button id="decrementKunafaChocolate">-</button>
-        <input type="number" id="kunafaChocolateQuantity" value="0" min="0" readonly>
-        <button id="incrementKunafaChocolate">+</button>
-        <img src="https://www.flourgirlbakeries.com/pub/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/p/i/pistachio_kunafa_chocolate.jpg" alt="Kunafa Chocolate" class="item-image" id="kunafaChocolateImage">
-        <span>Kunafa Chocolate</span>
+        <button id="decrementKDDIceCream">-</button>
+        <input type="number" id="kddIceCreamQuantity" value="0" min="0" readonly>
+        <button id="incrementKDDIceCream">+</button>
+        <img src="https://eshop.kddc.com/image/cache/catalog/ic_mc-250x250.jpg" alt="KDD Ice Cream" class="item-image" id="kddIceCreamImage">
+        <span>KDD Ice Cream</span>
+        <div class="toppings-toggle">
+          <span>With Toppings:</span>
+          <button id="toppingsNo" class="active">No</button>
+          <button id="toppingsYes">Yes</button>
+        </div>
       </div>
     </div>
 
@@ -296,7 +328,13 @@
           <td>0.000</td>
         </tr>
         <tr>
-          <td>Sausage and Kraft Cheese</td>
+          <td>Lemonade</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0.000</td>
+        </tr>
+        <tr>
+          <td>Zaatar</td>
           <td>0</td>
           <td>0</td>
           <td>0.000</td>
@@ -308,25 +346,13 @@
           <td>0.000</td>
         </tr>
         <tr>
-          <td>Za'atar</td>
+          <td>Sausage and Kraft Cheese</td>
           <td>0</td>
           <td>0</td>
           <td>0.000</td>
         </tr>
         <tr>
-          <td>Four Season</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0.000</td>
-        </tr>
-        <tr>
-          <td>Lemonade</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0.000</td>
-        </tr>
-        <tr>
-          <td>KDD Ice Cream</td>
+          <td>Chicken Rashid</td>
           <td>0</td>
           <td>0</td>
           <td>0.000</td>
@@ -338,7 +364,7 @@
           <td>0.000</td>
         </tr>
         <tr>
-          <td>Kunafa Chocolate</td>
+          <td>KDD Ice Cream</td>
           <td>0</td>
           <td>0</td>
           <td>0.000</td>
@@ -372,7 +398,12 @@
             <td>0.000 KD</td>
           </tr>
           <tr>
-            <td>Sausage and Kraft Cheese</td>
+            <td>Lemonade</td>
+            <td>0</td>
+            <td>0.000 KD</td>
+          </tr>
+          <tr>
+            <td>Zaatar</td>
             <td>0</td>
             <td>0.000 KD</td>
           </tr>
@@ -382,22 +413,12 @@
             <td>0.000 KD</td>
           </tr>
           <tr>
-            <td>Za'atar</td>
+            <td>Sausage and Kraft Cheese</td>
             <td>0</td>
             <td>0.000 KD</td>
           </tr>
           <tr>
-            <td>Four Season</td>
-            <td>0</td>
-            <td>0.000 KD</td>
-          </tr>
-          <tr>
-            <td>Lemonade</td>
-            <td>0</td>
-            <td>0.000 KD</td>
-          </tr>
-          <tr>
-            <td>KDD Ice Cream</td>
+            <td>Chicken Rashid</td>
             <td>0</td>
             <td>0.000 KD</td>
           </tr>
@@ -407,7 +428,7 @@
             <td>0.000 KD</td>
           </tr>
           <tr>
-            <td>Kunafa Chocolate</td>
+            <td>KDD Ice Cream</td>
             <td>0</td>
             <td>0.000 KD</td>
           </tr>
@@ -424,8 +445,8 @@
   <button class="sales-button" id="showFullSales">Full Sales</button>
 
   <script>
-// Define the current version of the app
-    const appVersion = '1.3.0'; // Increment this version number with each deployment
+    // Define the current version of the app
+    const appVersion = '1.8.0'; // Incremented version number
 
     // Function to check version and clear localStorage if needed
     function checkAndClearLocalStorage() {
@@ -433,8 +454,6 @@
       if (storedVersion !== appVersion) {
         // Clear the specific localStorage items used by the app
         localStorage.removeItem('cashierData'); // Remove the 'cashierData' key
-        // If there are other keys used by your app, remove them here
-        // Example: localStorage.removeItem('anotherKey');
 
         // Update the stored version to the current version
         localStorage.setItem('appVersion', appVersion);
@@ -443,16 +462,16 @@
 
     // Invoke the version check on page load
     checkAndClearLocalStorage();
+
     // Get quantity inputs
     const awarGalbQuantity = document.getElementById('awarGalbQuantity');
     const sausageKraftQuantity = document.getElementById('sausageKraftQuantity');
     const nutellaQuantity = document.getElementById('nutellaQuantity');
     const zaatarQuantity = document.getElementById('zaatarQuantity');
-    const fourSeasonQuantity = document.getElementById('fourSeasonQuantity');
+    const chickenRashidQuantity = document.getElementById('chickenRashidQuantity');
     const lemonadeQuantity = document.getElementById('lemonadeQuantity');
     const kddIceCreamQuantity = document.getElementById('kddIceCreamQuantity');
     const hashbrownQuantity = document.getElementById('hashbrownQuantity');
-    const kunafaChocolateQuantity = document.getElementById('kunafaChocolateQuantity');
 
     const totalAmount = document.getElementById('totalAmount');
     const placeOrderButton = document.getElementById('placeOrder');
@@ -464,27 +483,29 @@
     const fullSalesSummary = document.getElementById('fullSalesSummary');
     const fullSalesTotal = document.getElementById('fullSalesTotal');
 
+    const toppingsYesButton = document.getElementById('toppingsYes');
+    const toppingsNoButton = document.getElementById('toppingsNo');
+    let kddIceCreamToppings = false; // Default to no toppings
+
     const prices = {
       'Awar Galb': 0.750,
       'Sausage and Kraft Cheese': 0.750,
       'Nutella': 0.750,
       'Za\'atar': 0.500,
-      'Four Season': 1.000,
+      'Chicken Rashid': 0.750,
       'Lemonade': 0.500,
       'KDD Ice Cream': 0.500,
-      'Hashbrown': 0.750,
-      'Kunafa Chocolate': 2.000
+      'Hashbrown': 0.750
     };
 
     let awarGalbTotal = 0;
     let sausageKraftTotal = 0;
     let nutellaTotal = 0;
     let zaatarTotal = 0;
-    let fourSeasonTotal = 0;
+    let chickenRashidTotal = 0;
     let lemonadeTotal = 0;
     let kddIceCreamTotal = 0;
     let hashbrownTotal = 0;
-    let kunafaChocolateTotal = 0;
     let grandTotal = 0;
 
     function updateTotal() {
@@ -492,22 +513,25 @@
       const sausageKraftQuantityValue = parseInt(sausageKraftQuantity.value);
       const nutellaQuantityValue = parseInt(nutellaQuantity.value);
       const zaatarQuantityValue = parseInt(zaatarQuantity.value);
-      const fourSeasonQuantityValue = parseInt(fourSeasonQuantity.value);
+      const chickenRashidQuantityValue = parseInt(chickenRashidQuantity.value);
       const lemonadeQuantityValue = parseInt(lemonadeQuantity.value);
       const kddIceCreamQuantityValue = parseInt(kddIceCreamQuantity.value);
       const hashbrownQuantityValue = parseInt(hashbrownQuantity.value);
-      const kunafaChocolateQuantityValue = parseInt(kunafaChocolateQuantity.value);
 
-      const totalCost = 
+      let kddIceCreamCost = kddIceCreamQuantityValue * prices['KDD Ice Cream'];
+      if (kddIceCreamToppings) {
+        kddIceCreamCost += kddIceCreamQuantityValue * 0.250;
+      }
+
+      const totalCost =
         (awarGalbQuantityValue * prices['Awar Galb']) +
         (sausageKraftQuantityValue * prices['Sausage and Kraft Cheese']) +
         (nutellaQuantityValue * prices['Nutella']) +
         (zaatarQuantityValue * prices['Za\'atar']) +
-        (fourSeasonQuantityValue * prices['Four Season']) +
+        (chickenRashidQuantityValue * prices['Chicken Rashid']) +
         (lemonadeQuantityValue * prices['Lemonade']) +
-        (kddIceCreamQuantityValue * prices['KDD Ice Cream']) +
-        (hashbrownQuantityValue * prices['Hashbrown']) +
-        (kunafaChocolateQuantityValue * prices['Kunafa Chocolate']);
+        kddIceCreamCost +
+        (hashbrownQuantityValue * prices['Hashbrown']);
 
       totalAmount.textContent = totalCost.toFixed(3);
     }
@@ -517,11 +541,13 @@
       sausageKraftQuantity.value = 0;
       nutellaQuantity.value = 0;
       zaatarQuantity.value = 0;
-      fourSeasonQuantity.value = 0;
+      chickenRashidQuantity.value = 0;
       lemonadeQuantity.value = 0;
       kddIceCreamQuantity.value = 0;
       hashbrownQuantity.value = 0;
-      kunafaChocolateQuantity.value = 0;
+      kddIceCreamToppings = false;
+      toppingsNoButton.classList.add('active');
+      toppingsYesButton.classList.remove('active');
       updateTotal();
     }
 
@@ -530,149 +556,146 @@
       const sausageKraftQuantityValue = parseInt(sausageKraftQuantity.value);
       const nutellaQuantityValue = parseInt(nutellaQuantity.value);
       const zaatarQuantityValue = parseInt(zaatarQuantity.value);
-      const fourSeasonQuantityValue = parseInt(fourSeasonQuantity.value);
+      const chickenRashidQuantityValue = parseInt(chickenRashidQuantity.value);
       const lemonadeQuantityValue = parseInt(lemonadeQuantity.value);
       const kddIceCreamQuantityValue = parseInt(kddIceCreamQuantity.value);
       const hashbrownQuantityValue = parseInt(hashbrownQuantity.value);
-      const kunafaChocolateQuantityValue = parseInt(kunafaChocolateQuantity.value);
 
       const awarGalbRow = orderSummary.rows[0];
-      const sausageKraftRow = orderSummary.rows[1];
-      const nutellaRow = orderSummary.rows[2];
-      const zaatarRow = orderSummary.rows[3];
-      const fourSeasonRow = orderSummary.rows[4];
-      const lemonadeRow = orderSummary.rows[5];
-      const kddIceCreamRow = orderSummary.rows[6];
-      const hashbrownRow = orderSummary.rows[7];
-      const kunafaChocolateRow = orderSummary.rows[8];
-      const totalRow = orderSummary.rows[9];
+      const lemonadeRow = orderSummary.rows[1];
+      const zaatarRow = orderSummary.rows[2];
+      const nutellaRow = orderSummary.rows[3];
+      const sausageKraftRow = orderSummary.rows[4];
+      const chickenRashidRow = orderSummary.rows[5];
+      const hashbrownRow = orderSummary.rows[6];
+      const kddIceCreamRow = orderSummary.rows[7];
+      const totalRow = orderSummary.rows[8];
 
       awarGalbTotal += awarGalbQuantityValue;
-      sausageKraftTotal += sausageKraftQuantityValue;
-      nutellaTotal += nutellaQuantityValue;
-      zaatarTotal += zaatarQuantityValue;
-      fourSeasonTotal += fourSeasonQuantityValue;
       lemonadeTotal += lemonadeQuantityValue;
-      kddIceCreamTotal += kddIceCreamQuantityValue;
+      zaatarTotal += zaatarQuantityValue;
+      nutellaTotal += nutellaQuantityValue;
+      sausageKraftTotal += sausageKraftQuantityValue;
+      chickenRashidTotal += chickenRashidQuantityValue;
       hashbrownTotal += hashbrownQuantityValue;
-      kunafaChocolateTotal += kunafaChocolateQuantityValue;
-      grandTotal = awarGalbTotal + sausageKraftTotal + nutellaTotal + zaatarTotal + fourSeasonTotal + lemonadeTotal + kddIceCreamTotal + hashbrownTotal + kunafaChocolateTotal;
+      kddIceCreamTotal += kddIceCreamQuantityValue;
+      grandTotal = awarGalbTotal + lemonadeTotal + zaatarTotal + nutellaTotal + sausageKraftTotal + chickenRashidTotal + hashbrownTotal + kddIceCreamTotal;
 
       awarGalbRow.cells[1].textContent = awarGalbTotal;
       awarGalbRow.cells[2].textContent = awarGalbTotal;
       awarGalbRow.cells[3].textContent = (awarGalbTotal * prices['Awar Galb']).toFixed(3);
 
-      sausageKraftRow.cells[1].textContent = sausageKraftTotal;
-      sausageKraftRow.cells[2].textContent = sausageKraftTotal;
-      sausageKraftRow.cells[3].textContent = (sausageKraftTotal * prices['Sausage and Kraft Cheese']).toFixed(3);
-
-      nutellaRow.cells[1].textContent = nutellaTotal;
-      nutellaRow.cells[2].textContent = nutellaTotal;
-      nutellaRow.cells[3].textContent = (nutellaTotal * prices['Nutella']).toFixed(3);
+      lemonadeRow.cells[1].textContent = lemonadeTotal;
+      lemonadeRow.cells[2].textContent = lemonadeTotal;
+      lemonadeRow.cells[3].textContent = (lemonadeTotal * prices['Lemonade']).toFixed(3);
 
       zaatarRow.cells[1].textContent = zaatarTotal;
       zaatarRow.cells[2].textContent = zaatarTotal;
       zaatarRow.cells[3].textContent = (zaatarTotal * prices['Za\'atar']).toFixed(3);
 
-      fourSeasonRow.cells[1].textContent = fourSeasonTotal;
-      fourSeasonRow.cells[2].textContent = fourSeasonTotal;
-      fourSeasonRow.cells[3].textContent = (fourSeasonTotal * prices['Four Season']).toFixed(3);
+      nutellaRow.cells[1].textContent = nutellaTotal;
+      nutellaRow.cells[2].textContent = nutellaTotal;
+      nutellaRow.cells[3].textContent = (nutellaTotal * prices['Nutella']).toFixed(3);
 
-      lemonadeRow.cells[1].textContent = lemonadeTotal;
-      lemonadeRow.cells[2].textContent = lemonadeTotal;
-      lemonadeRow.cells[3].textContent = (lemonadeTotal * prices['Lemonade']).toFixed(3);
+      sausageKraftRow.cells[1].textContent = sausageKraftTotal;
+      sausageKraftRow.cells[2].textContent = sausageKraftTotal;
+      sausageKraftRow.cells[3].textContent = (sausageKraftTotal * prices['Sausage and Kraft Cheese']).toFixed(3);
 
-      kddIceCreamRow.cells[1].textContent = kddIceCreamTotal;
-      kddIceCreamRow.cells[2].textContent = kddIceCreamTotal;
-      kddIceCreamRow.cells[3].textContent = (kddIceCreamTotal * prices['KDD Ice Cream']).toFixed(3);
+      chickenRashidRow.cells[1].textContent = chickenRashidTotal;
+      chickenRashidRow.cells[2].textContent = chickenRashidTotal;
+      chickenRashidRow.cells[3].textContent = (chickenRashidTotal * prices['Chicken Rashid']).toFixed(3);
 
       hashbrownRow.cells[1].textContent = hashbrownTotal;
       hashbrownRow.cells[2].textContent = hashbrownTotal;
       hashbrownRow.cells[3].textContent = (hashbrownTotal * prices['Hashbrown']).toFixed(3);
 
-      kunafaChocolateRow.cells[1].textContent = kunafaChocolateTotal;
-      kunafaChocolateRow.cells[2].textContent = kunafaChocolateTotal;
-      kunafaChocolateRow.cells[3].textContent = (kunafaChocolateTotal * prices['Kunafa Chocolate']).toFixed(3);
+      let kddIceCreamCost = kddIceCreamTotal * prices['KDD Ice Cream'];
+      if (kddIceCreamToppings) {
+        kddIceCreamCost += kddIceCreamTotal * 0.250;
+      }
+      kddIceCreamRow.cells[1].textContent = kddIceCreamTotal;
+      kddIceCreamRow.cells[2].textContent = kddIceCreamTotal;
+      kddIceCreamRow.cells[3].textContent = kddIceCreamCost.toFixed(3);
 
       totalRow.cells[1].textContent = grandTotal;
       totalRow.cells[2].textContent = grandTotal;
       totalMoneySpent.textContent = (
         (awarGalbTotal * prices['Awar Galb']) +
-        (sausageKraftTotal * prices['Sausage and Kraft Cheese']) +
-        (nutellaTotal * prices['Nutella']) +
-        (zaatarTotal * prices['Za\'atar']) +
-        (fourSeasonTotal * prices['Four Season']) +
         (lemonadeTotal * prices['Lemonade']) +
-        (kddIceCreamTotal * prices['KDD Ice Cream']) +
+        (zaatarTotal * prices['Za\'atar']) +
+        (nutellaTotal * prices['Nutella']) +
+        (sausageKraftTotal * prices['Sausage and Kraft Cheese']) +
+        (chickenRashidTotal * prices['Chicken Rashid']) +
         (hashbrownTotal * prices['Hashbrown']) +
-        (kunafaChocolateTotal * prices['Kunafa Chocolate'])
+        ((kddIceCreamTotal * prices['KDD Ice Cream']) + (kddIceCreamToppings ? kddIceCreamTotal * 0.250 : 0))
       ).toFixed(3);
 
       addToFullSales(
         awarGalbQuantityValue,
-        sausageKraftQuantityValue,
-        nutellaQuantityValue,
-        zaatarQuantityValue,
-        fourSeasonQuantityValue,
         lemonadeQuantityValue,
-        kddIceCreamQuantityValue,
+        zaatarQuantityValue,
+        nutellaQuantityValue,
+        sausageKraftQuantityValue,
+        chickenRashidQuantityValue,
         hashbrownQuantityValue,
-        kunafaChocolateQuantityValue
+        kddIceCreamQuantityValue,
+        kddIceCreamToppings
       );
       saveData();
       resetQuantities();
     }
 
-    function addToFullSales(awarGalbQty, sausageKraftQty, nutellaQty, zaatarQty, fourSeasonQty, lemonadeQty, kddIceCreamQty, hashbrownQty, kunafaChocolateQty) {
+    function addToFullSales(awarGalbQty, lemonadeQty, zaatarQty, nutellaQty, sausageKraftQty, chickenRashidQty, hashbrownQty, kddIceCreamQty, iceCreamToppings) {
       const awarGalbRow = fullSalesSummary.rows[0];
-      const sausageKraftRow = fullSalesSummary.rows[1];
-      const nutellaRow = fullSalesSummary.rows[2];
-      const zaatarRow = fullSalesSummary.rows[3];
-      const fourSeasonRow = fullSalesSummary.rows[4];
-      const lemonadeRow = fullSalesSummary.rows[5];
-      const kddIceCreamRow = fullSalesSummary.rows[6];
-      const hashbrownRow = fullSalesSummary.rows[7];
-      const kunafaChocolateRow = fullSalesSummary.rows[8];
-      const totalRow = fullSalesSummary.rows[9];
+      const lemonadeRow = fullSalesSummary.rows[1];
+      const zaatarRow = fullSalesSummary.rows[2];
+      const nutellaRow = fullSalesSummary.rows[3];
+      const sausageKraftRow = fullSalesSummary.rows[4];
+      const chickenRashidRow = fullSalesSummary.rows[5];
+      const hashbrownRow = fullSalesSummary.rows[6];
+      const kddIceCreamRow = fullSalesSummary.rows[7];
+      const totalRow = fullSalesSummary.rows[8];
 
       awarGalbRow.cells[1].textContent = parseInt(awarGalbRow.cells[1].textContent) + awarGalbQty;
       awarGalbRow.cells[2].textContent = (parseFloat(awarGalbRow.cells[2].textContent) + awarGalbQty * prices['Awar Galb']).toFixed(3) + " KD";
 
-      sausageKraftRow.cells[1].textContent = parseInt(sausageKraftRow.cells[1].textContent) + sausageKraftQty;
-      sausageKraftRow.cells[2].textContent = (parseFloat(sausageKraftRow.cells[2].textContent) + sausageKraftQty * prices['Sausage and Kraft Cheese']).toFixed(3) + " KD";
-
-      nutellaRow.cells[1].textContent = parseInt(nutellaRow.cells[1].textContent) + nutellaQty;
-      nutellaRow.cells[2].textContent = (parseFloat(nutellaRow.cells[2].textContent) + nutellaQty * prices['Nutella']).toFixed(3) + " KD";
+      lemonadeRow.cells[1].textContent = parseInt(lemonadeRow.cells[1].textContent) + lemonadeQty;
+      lemonadeRow.cells[2].textContent = (parseFloat(lemonadeRow.cells[2].textContent) + lemonadeQty * prices['Lemonade']).toFixed(3) + " KD";
 
       zaatarRow.cells[1].textContent = parseInt(zaatarRow.cells[1].textContent) + zaatarQty;
       zaatarRow.cells[2].textContent = (parseFloat(zaatarRow.cells[2].textContent) + zaatarQty * prices['Za\'atar']).toFixed(3) + " KD";
 
-      fourSeasonRow.cells[1].textContent = parseInt(fourSeasonRow.cells[1].textContent) + fourSeasonQty;
-      fourSeasonRow.cells[2].textContent = (parseFloat(fourSeasonRow.cells[2].textContent) + fourSeasonQty * prices['Four Season']).toFixed(3) + " KD";
+      nutellaRow.cells[1].textContent = parseInt(nutellaRow.cells[1].textContent) + nutellaQty;
+      nutellaRow.cells[2].textContent = (parseFloat(nutellaRow.cells[2].textContent) + nutellaQty * prices['Nutella']).toFixed(3) + " KD";
 
-      lemonadeRow.cells[1].textContent = parseInt(lemonadeRow.cells[1].textContent) + lemonadeQty;
-      lemonadeRow.cells[2].textContent = (parseFloat(lemonadeRow.cells[2].textContent) + lemonadeQty * prices['Lemonade']).toFixed(3) + " KD";
+      sausageKraftRow.cells[1].textContent = parseInt(sausageKraftRow.cells[1].textContent) + sausageKraftQty;
+      sausageKraftRow.cells[2].textContent = (parseFloat(sausageKraftRow.cells[2].textContent) + sausageKraftQty * prices['Sausage and Kraft Cheese']).toFixed(3) + " KD";
 
-      kddIceCreamRow.cells[1].textContent = parseInt(kddIceCreamRow.cells[1].textContent) + kddIceCreamQty;
-      kddIceCreamRow.cells[2].textContent = (parseFloat(kddIceCreamRow.cells[2].textContent) + kddIceCreamQty * prices['KDD Ice Cream']).toFixed(3) + " KD";
+      chickenRashidRow.cells[1].textContent = parseInt(chickenRashidRow.cells[1].textContent) + chickenRashidQty;
+      chickenRashidRow.cells[2].textContent = (parseFloat(chickenRashidRow.cells[2].textContent) + chickenRashidQty * prices['Chicken Rashid']).toFixed(3) + " KD";
 
       hashbrownRow.cells[1].textContent = parseInt(hashbrownRow.cells[1].textContent) + hashbrownQty;
       hashbrownRow.cells[2].textContent = (parseFloat(hashbrownRow.cells[2].textContent) + hashbrownQty * prices['Hashbrown']).toFixed(3) + " KD";
 
-      kunafaChocolateRow.cells[1].textContent = parseInt(kunafaChocolateRow.cells[1].textContent) + kunafaChocolateQty;
-      kunafaChocolateRow.cells[2].textContent = (parseFloat(kunafaChocolateRow.cells[2].textContent) + kunafaChocolateQty * prices['Kunafa Chocolate']).toFixed(3) + " KD";
+      let iceCreamAmount = kddIceCreamQty * prices['KDD Ice Cream'];
+      if (iceCreamToppings) {
+        iceCreamAmount += kddIceCreamQty * 0.250;
+      }
+      kddIceCreamRow.cells[1].textContent = parseInt(kddIceCreamRow.cells[1].textContent) + kddIceCreamQty;
+      kddIceCreamRow.cells[2].textContent = (parseFloat(kddIceCreamRow.cells[2].textContent) + iceCreamAmount).toFixed(3) + " KD";
 
-      totalRow.cells[1].textContent = parseInt(totalRow.cells[1].textContent) + awarGalbQty + sausageKraftQty + nutellaQty + zaatarQty + fourSeasonQty + lemonadeQty + kddIceCreamQty + hashbrownQty + kunafaChocolateQty;
+      totalRow.cells[1].textContent = parseInt(totalRow.cells[1].textContent) + awarGalbQty + lemonadeQty + zaatarQty + nutellaQty + sausageKraftQty + chickenRashidQty + hashbrownQty + kddIceCreamQty;
+
       fullSalesTotal.textContent = (parseFloat(fullSalesTotal.textContent) +
         awarGalbQty * prices['Awar Galb'] +
-        sausageKraftQty * prices['Sausage and Kraft Cheese'] +
-        nutellaQty * prices['Nutella'] +
-        zaatarQty * prices['Za\'atar'] +
-        fourSeasonQty * prices['Four Season'] +
         lemonadeQty * prices['Lemonade'] +
-        kddIceCreamQty * prices['KDD Ice Cream'] +
+        zaatarQty * prices['Za\'atar'] +
+        nutellaQty * prices['Nutella'] +
+        sausageKraftQty * prices['Sausage and Kraft Cheese'] +
+        chickenRashidQty * prices['Chicken Rashid'] +
         hashbrownQty * prices['Hashbrown'] +
-        kunafaChocolateQty * prices['Kunafa Chocolate']).toFixed(3) + " KD";
+        iceCreamAmount
+      ).toFixed(3) + " KD";
 
       saveData();
     }
@@ -680,36 +703,34 @@
     function saveData() {
       const data = {
         awarGalbTotal,
-        sausageKraftTotal,
-        nutellaTotal,
-        zaatarTotal,
-        fourSeasonTotal,
         lemonadeTotal,
-        kddIceCreamTotal,
+        zaatarTotal,
+        nutellaTotal,
+        sausageKraftTotal,
+        chickenRashidTotal,
         hashbrownTotal,
-        kunafaChocolateTotal,
+        kddIceCreamTotal,
         grandTotal,
         totalMoneySpent: totalMoneySpent.textContent,
+        kddIceCreamToppings,
         fullSales: {
           awarGalbQty: fullSalesSummary.rows[0].cells[1].textContent,
           awarGalbAmount: fullSalesSummary.rows[0].cells[2].textContent,
-          sausageKraftQty: fullSalesSummary.rows[1].cells[1].textContent,
-          sausageKraftAmount: fullSalesSummary.rows[1].cells[2].textContent,
-          nutellaQty: fullSalesSummary.rows[2].cells[1].textContent,
-          nutellaAmount: fullSalesSummary.rows[2].cells[2].textContent,
-          zaatarQty: fullSalesSummary.rows[3].cells[1].textContent,
-          zaatarAmount: fullSalesSummary.rows[3].cells[2].textContent,
-          fourSeasonQty: fullSalesSummary.rows[4].cells[1].textContent,
-          fourSeasonAmount: fullSalesSummary.rows[4].cells[2].textContent,
-          lemonadeQty: fullSalesSummary.rows[5].cells[1].textContent,
-          lemonadeAmount: fullSalesSummary.rows[5].cells[2].textContent,
-          kddIceCreamQty: fullSalesSummary.rows[6].cells[1].textContent,
-          kddIceCreamAmount: fullSalesSummary.rows[6].cells[2].textContent,
-          hashbrownQty: fullSalesSummary.rows[7].cells[1].textContent,
-          hashbrownAmount: fullSalesSummary.rows[7].cells[2].textContent,
-          kunafaChocolateQty: fullSalesSummary.rows[8].cells[1].textContent,
-          kunafaChocolateAmount: fullSalesSummary.rows[8].cells[2].textContent,
-          totalQty: fullSalesSummary.rows[9].cells[1].textContent,
+          lemonadeQty: fullSalesSummary.rows[1].cells[1].textContent,
+          lemonadeAmount: fullSalesSummary.rows[1].cells[2].textContent,
+          zaatarQty: fullSalesSummary.rows[2].cells[1].textContent,
+          zaatarAmount: fullSalesSummary.rows[2].cells[2].textContent,
+          nutellaQty: fullSalesSummary.rows[3].cells[1].textContent,
+          nutellaAmount: fullSalesSummary.rows[3].cells[2].textContent,
+          sausageKraftQty: fullSalesSummary.rows[4].cells[1].textContent,
+          sausageKraftAmount: fullSalesSummary.rows[4].cells[2].textContent,
+          chickenRashidQty: fullSalesSummary.rows[5].cells[1].textContent,
+          chickenRashidAmount: fullSalesSummary.rows[5].cells[2].textContent,
+          hashbrownQty: fullSalesSummary.rows[6].cells[1].textContent,
+          hashbrownAmount: fullSalesSummary.rows[6].cells[2].textContent,
+          kddIceCreamQty: fullSalesSummary.rows[7].cells[1].textContent,
+          kddIceCreamAmount: fullSalesSummary.rows[7].cells[2].textContent,
+          totalQty: fullSalesSummary.rows[8].cells[1].textContent,
           totalAmount: fullSalesTotal.textContent
         }
       };
@@ -720,63 +741,62 @@
       const data = JSON.parse(localStorage.getItem('cashierData'));
       if (data) {
         awarGalbTotal = data.awarGalbTotal;
-        sausageKraftTotal = data.sausageKraftTotal;
-        nutellaTotal = data.nutellaTotal;
-        zaatarTotal = data.zaatarTotal;
-        fourSeasonTotal = data.fourSeasonTotal;
         lemonadeTotal = data.lemonadeTotal;
-        kddIceCreamTotal = data.kddIceCreamTotal;
+        zaatarTotal = data.zaatarTotal;
+        nutellaTotal = data.nutellaTotal;
+        sausageKraftTotal = data.sausageKraftTotal;
+        chickenRashidTotal = data.chickenRashidTotal;
         hashbrownTotal = data.hashbrownTotal;
-        kunafaChocolateTotal = data.kunafaChocolateTotal;
+        kddIceCreamTotal = data.kddIceCreamTotal;
         grandTotal = data.grandTotal;
         totalMoneySpent.textContent = data.totalMoneySpent;
+        kddIceCreamToppings = data.kddIceCreamToppings;
 
         const awarGalbRow = orderSummary.rows[0];
-        const sausageKraftRow = orderSummary.rows[1];
-        const nutellaRow = orderSummary.rows[2];
-        const zaatarRow = orderSummary.rows[3];
-        const fourSeasonRow = orderSummary.rows[4];
-        const lemonadeRow = orderSummary.rows[5];
-        const kddIceCreamRow = orderSummary.rows[6];
-        const hashbrownRow = orderSummary.rows[7];
-        const kunafaChocolateRow = orderSummary.rows[8];
-        const totalRow = orderSummary.rows[9];
+        const lemonadeRow = orderSummary.rows[1];
+        const zaatarRow = orderSummary.rows[2];
+        const nutellaRow = orderSummary.rows[3];
+        const sausageKraftRow = orderSummary.rows[4];
+        const chickenRashidRow = orderSummary.rows[5];
+        const hashbrownRow = orderSummary.rows[6];
+        const kddIceCreamRow = orderSummary.rows[7];
+        const totalRow = orderSummary.rows[8];
 
         awarGalbRow.cells[1].textContent = awarGalbTotal;
         awarGalbRow.cells[2].textContent = awarGalbTotal;
         awarGalbRow.cells[3].textContent = (awarGalbTotal * prices['Awar Galb']).toFixed(3);
 
-        sausageKraftRow.cells[1].textContent = sausageKraftTotal;
-        sausageKraftRow.cells[2].textContent = sausageKraftTotal;
-        sausageKraftRow.cells[3].textContent = (sausageKraftTotal * prices['Sausage and Kraft Cheese']).toFixed(3);
-
-        nutellaRow.cells[1].textContent = nutellaTotal;
-        nutellaRow.cells[2].textContent = nutellaTotal;
-        nutellaRow.cells[3].textContent = (nutellaTotal * prices['Nutella']).toFixed(3);
+        lemonadeRow.cells[1].textContent = lemonadeTotal;
+        lemonadeRow.cells[2].textContent = lemonadeTotal;
+        lemonadeRow.cells[3].textContent = (lemonadeTotal * prices['Lemonade']).toFixed(3);
 
         zaatarRow.cells[1].textContent = zaatarTotal;
         zaatarRow.cells[2].textContent = zaatarTotal;
         zaatarRow.cells[3].textContent = (zaatarTotal * prices['Za\'atar']).toFixed(3);
 
-        fourSeasonRow.cells[1].textContent = fourSeasonTotal;
-        fourSeasonRow.cells[2].textContent = fourSeasonTotal;
-        fourSeasonRow.cells[3].textContent = (fourSeasonTotal * prices['Four Season']).toFixed(3);
+        nutellaRow.cells[1].textContent = nutellaTotal;
+        nutellaRow.cells[2].textContent = nutellaTotal;
+        nutellaRow.cells[3].textContent = (nutellaTotal * prices['Nutella']).toFixed(3);
 
-        lemonadeRow.cells[1].textContent = lemonadeTotal;
-        lemonadeRow.cells[2].textContent = lemonadeTotal;
-        lemonadeRow.cells[3].textContent = (lemonadeTotal * prices['Lemonade']).toFixed(3);
+        sausageKraftRow.cells[1].textContent = sausageKraftTotal;
+        sausageKraftRow.cells[2].textContent = sausageKraftTotal;
+        sausageKraftRow.cells[3].textContent = (sausageKraftTotal * prices['Sausage and Kraft Cheese']).toFixed(3);
 
-        kddIceCreamRow.cells[1].textContent = kddIceCreamTotal;
-        kddIceCreamRow.cells[2].textContent = kddIceCreamTotal;
-        kddIceCreamRow.cells[3].textContent = (kddIceCreamTotal * prices['KDD Ice Cream']).toFixed(3);
+        chickenRashidRow.cells[1].textContent = chickenRashidTotal;
+        chickenRashidRow.cells[2].textContent = chickenRashidTotal;
+        chickenRashidRow.cells[3].textContent = (chickenRashidTotal * prices['Chicken Rashid']).toFixed(3);
 
         hashbrownRow.cells[1].textContent = hashbrownTotal;
         hashbrownRow.cells[2].textContent = hashbrownTotal;
         hashbrownRow.cells[3].textContent = (hashbrownTotal * prices['Hashbrown']).toFixed(3);
 
-        kunafaChocolateRow.cells[1].textContent = kunafaChocolateTotal;
-        kunafaChocolateRow.cells[2].textContent = kunafaChocolateTotal;
-        kunafaChocolateRow.cells[3].textContent = (kunafaChocolateTotal * prices['Kunafa Chocolate']).toFixed(3);
+        let kddIceCreamCost = kddIceCreamTotal * prices['KDD Ice Cream'];
+        if (kddIceCreamToppings) {
+          kddIceCreamCost += kddIceCreamTotal * 0.250;
+        }
+        kddIceCreamRow.cells[1].textContent = kddIceCreamTotal;
+        kddIceCreamRow.cells[2].textContent = kddIceCreamTotal;
+        kddIceCreamRow.cells[3].textContent = kddIceCreamCost.toFixed(3);
 
         totalRow.cells[1].textContent = grandTotal;
         totalRow.cells[2].textContent = grandTotal;
@@ -785,32 +805,38 @@
         fullSalesSummary.rows[0].cells[1].textContent = data.fullSales.awarGalbQty;
         fullSalesSummary.rows[0].cells[2].textContent = data.fullSales.awarGalbAmount;
 
-        fullSalesSummary.rows[1].cells[1].textContent = data.fullSales.sausageKraftQty;
-        fullSalesSummary.rows[1].cells[2].textContent = data.fullSales.sausageKraftAmount;
+        fullSalesSummary.rows[1].cells[1].textContent = data.fullSales.lemonadeQty;
+        fullSalesSummary.rows[1].cells[2].textContent = data.fullSales.lemonadeAmount;
 
-        fullSalesSummary.rows[2].cells[1].textContent = data.fullSales.nutellaQty;
-        fullSalesSummary.rows[2].cells[2].textContent = data.fullSales.nutellaAmount;
+        fullSalesSummary.rows[2].cells[1].textContent = data.fullSales.zaatarQty;
+        fullSalesSummary.rows[2].cells[2].textContent = data.fullSales.zaatarAmount;
 
-        fullSalesSummary.rows[3].cells[1].textContent = data.fullSales.zaatarQty;
-        fullSalesSummary.rows[3].cells[2].textContent = data.fullSales.zaatarAmount;
+        fullSalesSummary.rows[3].cells[1].textContent = data.fullSales.nutellaQty;
+        fullSalesSummary.rows[3].cells[2].textContent = data.fullSales.nutellaAmount;
 
-        fullSalesSummary.rows[4].cells[1].textContent = data.fullSales.fourSeasonQty;
-        fullSalesSummary.rows[4].cells[2].textContent = data.fullSales.fourSeasonAmount;
+        fullSalesSummary.rows[4].cells[1].textContent = data.fullSales.sausageKraftQty;
+        fullSalesSummary.rows[4].cells[2].textContent = data.fullSales.sausageKraftAmount;
 
-        fullSalesSummary.rows[5].cells[1].textContent = data.fullSales.lemonadeQty;
-        fullSalesSummary.rows[5].cells[2].textContent = data.fullSales.lemonadeAmount;
+        fullSalesSummary.rows[5].cells[1].textContent = data.fullSales.chickenRashidQty;
+        fullSalesSummary.rows[5].cells[2].textContent = data.fullSales.chickenRashidAmount;
 
-        fullSalesSummary.rows[6].cells[1].textContent = data.fullSales.kddIceCreamQty;
-        fullSalesSummary.rows[6].cells[2].textContent = data.fullSales.kddIceCreamAmount;
+        fullSalesSummary.rows[6].cells[1].textContent = data.fullSales.hashbrownQty;
+        fullSalesSummary.rows[6].cells[2].textContent = data.fullSales.hashbrownAmount;
 
-        fullSalesSummary.rows[7].cells[1].textContent = data.fullSales.hashbrownQty;
-        fullSalesSummary.rows[7].cells[2].textContent = data.fullSales.hashbrownAmount;
+        fullSalesSummary.rows[7].cells[1].textContent = data.fullSales.kddIceCreamQty;
+        fullSalesSummary.rows[7].cells[2].textContent = data.fullSales.kddIceCreamAmount;
 
-        fullSalesSummary.rows[8].cells[1].textContent = data.fullSales.kunafaChocolateQty;
-        fullSalesSummary.rows[8].cells[2].textContent = data.fullSales.kunafaChocolateAmount;
-
-        fullSalesSummary.rows[9].cells[1].textContent = data.fullSales.totalQty;
+        fullSalesSummary.rows[8].cells[1].textContent = data.fullSales.totalQty;
         fullSalesTotal.textContent = data.fullSales.totalAmount;
+
+        // Update toppings buttons
+        if (kddIceCreamToppings) {
+          toppingsYesButton.classList.add('active');
+          toppingsNoButton.classList.remove('active');
+        } else {
+          toppingsYesButton.classList.remove('active');
+          toppingsNoButton.classList.add('active');
+        }
       }
     }
 
@@ -827,26 +853,14 @@
       }
     });
 
-    document.getElementById('incrementSausageKraft').addEventListener('click', () => {
-      sausageKraftQuantity.value = parseInt(sausageKraftQuantity.value) + 1;
+    document.getElementById('incrementLemonade').addEventListener('click', () => {
+      lemonadeQuantity.value = parseInt(lemonadeQuantity.value) + 1;
       updateTotal();
     });
 
-    document.getElementById('decrementSausageKraft').addEventListener('click', () => {
-      if (sausageKraftQuantity.value > 0) {
-        sausageKraftQuantity.value = parseInt(sausageKraftQuantity.value) - 1;
-        updateTotal();
-      }
-    });
-
-    document.getElementById('incrementNutella').addEventListener('click', () => {
-      nutellaQuantity.value = parseInt(nutellaQuantity.value) + 1;
-      updateTotal();
-    });
-
-    document.getElementById('decrementNutella').addEventListener('click', () => {
-      if (nutellaQuantity.value > 0) {
-        nutellaQuantity.value = parseInt(nutellaQuantity.value) - 1;
+    document.getElementById('decrementLemonade').addEventListener('click', () => {
+      if (lemonadeQuantity.value > 0) {
+        lemonadeQuantity.value = parseInt(lemonadeQuantity.value) - 1;
         updateTotal();
       }
     });
@@ -863,38 +877,38 @@
       }
     });
 
-    document.getElementById('incrementFourSeason').addEventListener('click', () => {
-      fourSeasonQuantity.value = parseInt(fourSeasonQuantity.value) + 1;
+    document.getElementById('incrementNutella').addEventListener('click', () => {
+      nutellaQuantity.value = parseInt(nutellaQuantity.value) + 1;
       updateTotal();
     });
 
-    document.getElementById('decrementFourSeason').addEventListener('click', () => {
-      if (fourSeasonQuantity.value > 0) {
-        fourSeasonQuantity.value = parseInt(fourSeasonQuantity.value) - 1;
+    document.getElementById('decrementNutella').addEventListener('click', () => {
+      if (nutellaQuantity.value > 0) {
+        nutellaQuantity.value = parseInt(nutellaQuantity.value) - 1;
         updateTotal();
       }
     });
 
-    document.getElementById('incrementLemonade').addEventListener('click', () => {
-      lemonadeQuantity.value = parseInt(lemonadeQuantity.value) + 1;
+    document.getElementById('incrementSausageKraft').addEventListener('click', () => {
+      sausageKraftQuantity.value = parseInt(sausageKraftQuantity.value) + 1;
       updateTotal();
     });
 
-    document.getElementById('decrementLemonade').addEventListener('click', () => {
-      if (lemonadeQuantity.value > 0) {
-        lemonadeQuantity.value = parseInt(lemonadeQuantity.value) - 1;
+    document.getElementById('decrementSausageKraft').addEventListener('click', () => {
+      if (sausageKraftQuantity.value > 0) {
+        sausageKraftQuantity.value = parseInt(sausageKraftQuantity.value) - 1;
         updateTotal();
       }
     });
 
-    document.getElementById('incrementKDDIceCream').addEventListener('click', () => {
-      kddIceCreamQuantity.value = parseInt(kddIceCreamQuantity.value) + 1;
+    document.getElementById('incrementChickenRashid').addEventListener('click', () => {
+      chickenRashidQuantity.value = parseInt(chickenRashidQuantity.value) + 1;
       updateTotal();
     });
 
-    document.getElementById('decrementKDDIceCream').addEventListener('click', () => {
-      if (kddIceCreamQuantity.value > 0) {
-        kddIceCreamQuantity.value = parseInt(kddIceCreamQuantity.value) - 1;
+    document.getElementById('decrementChickenRashid').addEventListener('click', () => {
+      if (chickenRashidQuantity.value > 0) {
+        chickenRashidQuantity.value = parseInt(chickenRashidQuantity.value) - 1;
         updateTotal();
       }
     });
@@ -911,14 +925,14 @@
       }
     });
 
-    document.getElementById('incrementKunafaChocolate').addEventListener('click', () => {
-      kunafaChocolateQuantity.value = parseInt(kunafaChocolateQuantity.value) + 1;
+    document.getElementById('incrementKDDIceCream').addEventListener('click', () => {
+      kddIceCreamQuantity.value = parseInt(kddIceCreamQuantity.value) + 1;
       updateTotal();
     });
 
-    document.getElementById('decrementKunafaChocolate').addEventListener('click', () => {
-      if (kunafaChocolateQuantity.value > 0) {
-        kunafaChocolateQuantity.value = parseInt(kunafaChocolateQuantity.value) - 1;
+    document.getElementById('decrementKDDIceCream').addEventListener('click', () => {
+      if (kddIceCreamQuantity.value > 0) {
+        kddIceCreamQuantity.value = parseInt(kddIceCreamQuantity.value) - 1;
         updateTotal();
       }
     });
@@ -931,6 +945,21 @@
 
     closeFullSalesButton.addEventListener('click', () => {
       fullSalesContainer.style.display = 'none';
+    });
+
+    // Toppings toggle buttons
+    toppingsYesButton.addEventListener('click', () => {
+      kddIceCreamToppings = true;
+      toppingsYesButton.classList.add('active');
+      toppingsNoButton.classList.remove('active');
+      updateTotal();
+    });
+
+    toppingsNoButton.addEventListener('click', () => {
+      kddIceCreamToppings = false;
+      toppingsNoButton.classList.add('active');
+      toppingsYesButton.classList.remove('active');
+      updateTotal();
     });
 
     // Load data on page load
